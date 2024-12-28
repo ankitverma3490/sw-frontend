@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginBottom: 19,
   },

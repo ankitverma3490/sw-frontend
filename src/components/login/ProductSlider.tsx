@@ -47,10 +47,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginHorizontal: 10,
     width: screenWidth * 0.26,
-    height: screenHeight * 0.26,
+    height: screenWidth * 0.26,
     backgroundColor: '#e9f7f8',
     borderRadius: 25,
     alignItems: 'center',
+    justifyContent:'center'
   },
   image: {
     width: '100%',
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   },
   autoScroll: {
     position: 'absolute',
-    zIndex: -3,
+    zIndex: -3, 
   },
   gridContainer: {
     justifyContent: 'center',
