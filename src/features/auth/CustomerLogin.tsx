@@ -5,7 +5,10 @@ import {
   Animated,
   Image,
   SafeAreaView,
+  Keyboard,
+  Alert,
 } from 'react-native';
+import logo from '@assets/images/logo.png'
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {
   GestureHandlerRootView,
@@ -16,13 +19,17 @@ import CustomSafeAreaView from '@components/global/CustomSafeAreaView';
 import ProductSlider from '@components/login/ProductSlider';
 import {resetAndNavigate} from '@utils/Navigation';
 import CustomText from '@components/ui/CustomText';
-import {Colors, Fonts} from '@utils/Constants';
+import {Colors, Fonts, lightColors} from '@utils/Constants';
 import CustomInput from '@components/ui/CustomInput';
-import CustomButton from '@components/ui/CustomButton';
 import useKeyBoardOffsetHeight from '@utils/useKeyBoardOffsetHeight';
+import CustomButton from '@components/ui/CustomButton';
+import LinearGradient from 'react-native-linear-gradient'
+import { customerLogin } from '../../services/authService';
+
+const bottomColors = [...lightColors].reverse()
 const CustomerLogin: FC = () => {
   const [gestureSequence, setGestureSequence] = useState<string[]>([]);
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
   const keyboardOffsetHeight = useKeyBoardOffsetHeight();
   const animatedValue = useRef(new Animated.Value(0)).current;
@@ -42,7 +49,18 @@ const CustomerLogin: FC = () => {
     }
   }, [keyboardOffsetHeight]);
 
-  const handleAuth = async () => {};
+  const handleAuth = async () => {
+    Keyboard.dismiss()
+    setLoading(true);
+    try {
+      await customerLogin(phoneNumber)
+      resetAndNavigate("ProductDashboard")
+    } catch (error) {
+      Alert.alert("Login Failed")
+    }finally{
+      setLoading(false)
+    }
+  };
 
   const handleGesture = ({nativeEvent}: any) => {
     if (nativeEvent.state == State.END) {
@@ -74,9 +92,10 @@ const CustomerLogin: FC = () => {
               keyboardShouldPersistTaps={'handled'}
               contentContainerStyle={styles.subContainer}
               style={{transform: [{translateY: animatedValue}]}}>
+                <LinearGradient colors={bottomColors} style={styles.gradient}/>
               <View style={styles.content}>
                 <Image
-                  source={require('../../assets/images/logo.png')}
+                  source={logo}
                   style={styles.logo}
                 />
                 <CustomText variant="h2" fontFamily={Fonts.Bold}>
@@ -171,6 +190,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f9fc',
     width: '100%',
   },
+  gradient:{
+    paddingTop:60,
+    width:'100%'
+  }
 });
 
 export default CustomerLogin;
