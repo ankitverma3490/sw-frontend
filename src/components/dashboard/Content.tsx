@@ -6,7 +6,7 @@ import CustomText from '@components/ui/CustomText'
 import { Fonts } from '@utils/Constants'
 import CategoryContainer from './CategoryContainer'
 const Content = () => {
-  console.log("categories : ", categories)
+  
   return (
     <View style={styles.container}>
        {/* <AdCarousel adData={adData}/>  */}

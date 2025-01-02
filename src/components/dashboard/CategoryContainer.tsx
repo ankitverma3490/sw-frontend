@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View,StyleSheet, Image} from 'react-native';
 import React, { FC } from 'react';
 import ScalePress from '@components/ui/ScalePress';
 import {navigate} from '@utils/Navigation';
@@ -9,10 +9,10 @@ const CategoryContainer:FC<{data:any}> = ({data}) => {
   const renderItem = (items: any[]) => {
     return (
       <>
-        {items.map((item, index) => {
+        {items.map((item) => {
           return (
             <ScalePress
-              onPress={() => navigate('ProductCateogries')}
+              onPress={() => navigate('ProductCategories')}
               key={item.id}
               style={styles.item}>
               <View style={styles.imageContainer}>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
-    //  aspectRatio: 1, 
+    //  aspectRatio: 1,    //keep images square
   },
 });
 export default CategoryContainer;

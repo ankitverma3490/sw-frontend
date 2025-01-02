@@ -7,6 +7,7 @@ import CustomerLogin from '@features/auth/CustomerLogin';
 import DeliveryLogin from '@features/auth/DeliveryLogin';
 import ProductDashboard from '@features/dashboard/ProductDashboard';
 import DeliveryDashboard from '@features/delivery/DeliveryDashboard';
+import ProductCategories from '@features/category/ProductCategories';
 const stack = createNativeStackNavigator();
 const Navigation: FC = () => {
   return (
@@ -29,6 +30,11 @@ const Navigation: FC = () => {
           options={{animation: 'fade'}}
           name="ProductDashboard"
           component={ProductDashboard}
+        />
+        <stack.Screen
+          options={{animation: 'fade'}}
+          name="ProductCategories"
+          component={ProductCategories}
         />
         <stack.Screen
           options={{animation: 'fade'}}
