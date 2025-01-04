@@ -18,13 +18,8 @@ const Navigation: FC = () => {
         <stack.Screen name="SplashScreen" component={SplashScreen} />
         <stack.Screen
           options={{animation: 'fade'}}
-          name="CustomerLogin"
-          component={CustomerLogin}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="DeliveryLogin"
-          component={DeliveryLogin}
+          name="ProductCategories"
+          component={ProductCategories}
         />
         <stack.Screen
           options={{animation: 'fade'}}
@@ -33,13 +28,18 @@ const Navigation: FC = () => {
         />
         <stack.Screen
           options={{animation: 'fade'}}
-          name="ProductCategories"
-          component={ProductCategories}
+          name="DeliveryDashboard"
+          component={DeliveryDashboard}
         />
         <stack.Screen
           options={{animation: 'fade'}}
-          name="DeliveryDashboard"
-          component={DeliveryDashboard}
+          name="DeliveryLogin"
+          component={DeliveryLogin}
+        />
+        <stack.Screen
+          options={{animation: 'fade'}}
+          name="CustomerLogin"
+          component={CustomerLogin}
         />
       </stack.Navigator>
     </NavigationContainer>

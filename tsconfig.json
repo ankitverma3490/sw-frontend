@@ -12,6 +12,7 @@
        "@nvigation/*": ["navigation/*"],
        "@state/*": ["state/*"],
        "@utils/*": ["utils/*"],
+       "@styles/*": ["styles/*"],
 
     }
   }
