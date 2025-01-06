@@ -27,7 +27,7 @@ import {Fonts} from '@utils/Constants';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import Icon  from 'react-native-vector-icons/Ionicons';
 import withCart from '@features/cart/WithCart';
-
+import withLiveStatus from '@features/map/withLiveStatus';
 const NOTICE_HEIGHT = -(NoticeHeight + 12);
 const ProductDashboard = () => {
   const noticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current;
@@ -146,4 +146,4 @@ const styles = StyleSheet.create({
     zIndex:999
   }
 });
-export default withCart(withCollapsibleContext(ProductDashboard));
+export default withLiveStatus(withCart(withCollapsibleContext(ProductDashboard)));
