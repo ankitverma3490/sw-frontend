@@ -1,5 +1,6 @@
 import CustomText from "@components/ui/CustomText"
 import { useNavigationState } from "@react-navigation/native"
+import { SOCKET_URL } from "@services/config"
 import { getOrderById } from "@services/orderService"
 import { useAuthStore } from "@state/authStore"
 import { hocStyles } from "@styles/GlobalStyles"
@@ -7,6 +8,7 @@ import { Colors, Fonts } from "@utils/Constants"
 import { navigate } from "@utils/Navigation"
 import React, { FC, useEffect } from "react"
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
+import io  from "socket.io-client"
 
  const withLiveStatus =<P extends object>(WrappedComponent:React.ComponentType<P>):FC<P>=>{
      const WithLiveStatusComponent:FC<P>=(props)=>{
@@ -18,8 +20,25 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
             setCurrentOrder(data)
         }
         useEffect(()=>{
-            fetchOrderDetails()
-        },[])
+            if(currentOrder){
+                const socketInstance = io(SOCKET_URL,{
+                    transports:['websocket'],
+                    withCredentials:false
+                })
+                socketInstance.emit('joinRoom',currentOrder?._id)
+                socketInstance.on('LiveTrackingUpdates',(updatedOrder)=>{
+                    fetchOrderDetails()
+                    console.log("RECEIVING LIVE UPDATES")
+                })
+                socketInstance.on('orderConfirmed',(confirmOrder)=>{
+                    fetchOrderDetails()
+                    console.log("ORDER CONFIRMATION LIVE UPDATES")
+                })
+                return ()=>{socketInstance.disconnect()}
+                
+            }
+             
+        },[currentOrder])
         return(
             <View style={styles.container}>
                <WrappedComponent {...props}/>
