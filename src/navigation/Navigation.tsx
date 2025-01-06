@@ -11,6 +11,7 @@ import ProductCategories from '@features/category/ProductCategories';
 import ProductOrder from '@features/order/ProductOrder';
 import OrderSuccess from '@features/order/OrderSuccess';
 import LiveTracking from '@features/map/LiveTracking';
+import Profile from '@features/profile/Profile';
 const stack = createNativeStackNavigator();
 const Navigation: FC = () => {
   return (
@@ -19,6 +20,11 @@ const Navigation: FC = () => {
         initialRouteName="SplashScreen"
         screenOptions={{headerShown: false}}>
         <stack.Screen name="SplashScreen" component={SplashScreen} />
+        <stack.Screen
+          options={{animation: 'fade'}}
+          name="Profile"
+          component={Profile}
+        />
         <stack.Screen
           options={{animation: 'fade'}}
           name="ProductDashboard"
@@ -49,8 +55,7 @@ const Navigation: FC = () => {
           options={{animation: 'fade'}}
           name="OrderSuccess"
           component={OrderSuccess}
-        />
-         
+        /> 
         <stack.Screen
           options={{animation: 'fade'}}
           name="DeliveryLogin"
