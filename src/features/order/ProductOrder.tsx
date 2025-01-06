@@ -1,5 +1,5 @@
-import {View, Text, StyleSheet, ScrollView, Image, Platform} from 'react-native';
-import React, {FC} from 'react';
+import {View, Text, StyleSheet, ScrollView, Image, Platform, TouchableOpacity, Alert} from 'react-native';
+import React, {FC, useState} from 'react';
 import CustomHeader from '@components/ui/CustomHeader';
 import {Colors, Fonts} from '@utils/Constants';
 import OrderList from './OrderList';
@@ -10,11 +10,42 @@ import {useCartStore} from '@state/CartStore';
 import BillDetails from './BillDetails';
 import { hocStyles } from '@styles/GlobalStyles';
 import { useAuthStore } from '@state/authStore';
+import ArrowButton from '@components/ui/ArrowButton';
+import { navigate } from '@utils/Navigation';
+import { createOrder } from '@services/orderService';
 
 const ProductOrder: FC = () => {
   const {getTotalPrice, cart, clearCart} = useCartStore();
   const {user , currentOrder ,setCurrentOrder}= useAuthStore()
   const totalItemPrice = getTotalPrice();
+  const [loading,setLoading] = useState(false)
+
+  const handlePlaceOrder = async()=>{
+        if(currentOrder!==null){
+          console.log(currentOrder)
+            Alert.alert("Let your first order to be delivered")
+            return
+        }
+        const formattedData = cart.map(item=>({
+            id: item._id,
+            item: item.item,
+            count: item.count
+        }))
+        if(formattedData.length==0){
+            Alert.alert("Add items to place order")
+            return
+        }
+        setLoading(true)
+        const data = await createOrder(formattedData,totalItemPrice)
+        if(data!=null){
+            setCurrentOrder(data)
+            clearCart()
+            navigate('OrderSuccess',{...data})
+        }else{
+            Alert.alert("There was an Error")
+        }
+        setLoading(false)
+  }
   return (
     <View style={styles.container}>
       <CustomHeader title="Checkout" />
@@ -60,6 +91,26 @@ const ProductOrder: FC = () => {
                         <CustomText variant='h9' numberOfLines={2} style={{opacity:0.6}}>{user?.address}</CustomText>
                     </View>
                 </View>
+                <TouchableOpacity>
+                    <CustomText variant='h8' style={{color:Colors.secondary}} fontFamily={Fonts.Medium}>Change</CustomText>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.paymentGateway}>
+                <View style={{width:'30%'}}>
+                  <CustomText fontSize={RFValue(6)}>💵 PAY USING</CustomText>
+                  <CustomText variant='h9' style={{marginTop:2}} fontFamily={Fonts.Regular}>Cash On Delivery</CustomText>
+                </View>
+                <View style={{width:'70%'}}>
+                  <ArrowButton
+                  loading={loading}
+                  price={totalItemPrice}
+                  title='Place Order'
+                  onPress={async()=>{
+                    await handlePlaceOrder()
+                  }}
+                  />
+                </View>
+
             </View>
         </View>
       </View>
@@ -105,6 +156,12 @@ const styles = StyleSheet.create({
     paddingBottom:10,
     borderBottomWidth:0.7,
     borderColor:Colors.border
+  },
+  paymentGateway:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    paddingLeft:14
   }
 });
 export default ProductOrder;
