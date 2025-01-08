@@ -22,8 +22,7 @@ const ProductOrder: FC = () => {
 
   const handlePlaceOrder = async()=>{
         if(currentOrder!==null){
-          console.log(currentOrder)
-            Alert.alert("Let your first order to be delivered")
+             Alert.alert("Let your first order to be delivered")
             return
         }
         const formattedData = cart.map(item=>({
