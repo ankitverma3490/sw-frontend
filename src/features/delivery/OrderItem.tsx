@@ -1,9 +1,11 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {FC} from 'react';
 import {Colors, Fonts} from '@utils/Constants';
 import CustomText from '@components/ui/CustomText';
 import {RFValue} from 'react-native-responsive-fontsize';
-import { formatISOToCustom } from '@utils/DateUtils';
+import {formatISOToCustom} from '@utils/DateUtils';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {navigate} from '@utils/Navigation';
 interface CartItem {
   _id: string | number;
   item: any;
@@ -12,7 +14,7 @@ interface CartItem {
 interface Order {
   orderId: string;
   items: CartItem[];
-  deliveryLocation:any;
+  deliveryLocation: any;
   totalPrice: number;
   createdAt: string;
   status: 'confirmed' | 'completed';
@@ -31,9 +33,7 @@ function getStatusColor(status: string) {
       return '#6c757d';
   }
 }
-
 const OrderItem: FC<{item: Order; index: number}> = ({item, index}) => {
-     
   return (
     <View style={styles.container}>
       <View style={styles.flexRowBetween}>
@@ -51,21 +51,34 @@ const OrderItem: FC<{item: Order; index: number}> = ({item, index}) => {
         </View>
       </View>
       <View style={styles.itemsContainer}>
-       {item.items.slice(0,2).map((i,idx)=>{
-        return(
-           <CustomText variant='h8' numberOfLines={1} key={idx}>
-         
-           </CustomText>
-        )
-       })}
+        {item.items.slice(0, 2).map((i, idx) => {
+          return (
+            <CustomText variant="h8" numberOfLines={1} key={idx}>
+             {i.count}x  {i.item.name}
+            </CustomText>
+          );
+        })}
       </View>
-      <View style={[styles.flexRowBetween,styles.addressContainer]}>
+      <View style={[styles.flexRowBetween, styles.addressContainer]}>
         <View style={styles.addressTextContainer}>
-         <CustomText variant='h8' numberOfLines={1}>{item?.deliveryLocation?.address}</CustomText>    
-          <CustomText variant='h8' numberOfLines={1}>
+          <CustomText variant="h8" numberOfLines={1}>
+            {item?.deliveryLocation?.address}
+          </CustomText>
+          <CustomText  style={styles.dateText}>
             {formatISOToCustom(item?.createdAt)}
           </CustomText>
         </View>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => {
+            navigate('DeliveryMap', {...item});
+          }}>
+          <Icon
+            name="arrow-right-circle"
+            size={RFValue(24)}
+            color={Colors.primary}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
