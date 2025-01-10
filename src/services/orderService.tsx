@@ -39,15 +39,40 @@ export const fetchOrders = async (
   branchId: string,
   userId: string,
 ) => {
-  let uri =
-    status == 'available'
+   let uri =
+    status === 'available'
       ? `order?status=${status}&branchId=${branchId}`
-      : `order?branchId=${branchId}&deliveryPartnerId=${userId}&status=delivered`;
+      : `order?branchId=${userId}&deliveryPartnerId=${branchId}&status=delivered`;
   try {
     const response = await appAxios.get(uri);
     return response.data;
   } catch (error) {
     console.log('Fetch Delivery order Error', error);
+    return null;
+  }
+};
+
+export const sendLiveOrderUpdates  = async (id: string , location:any,status:string) => {
+  try {
+    const response = await appAxios.patch(`/order/${id}/status`,{
+       deliveryPersonLocation:location,
+       status
+    });
+    return response.data;
+  } catch (error) {
+    console.log('SendLiveOrderUpdates Error', error);
+    return null;
+  }
+};
+
+export const confirmOrder  = async (id: string , location:any) => {
+  try {
+    const response = await appAxios.post(`/order/${id}/confirm`,{
+       deliveryPersonLocation:location
+    });
+    return response.data;
+  } catch (error) {
+    console.log('Confirm order Error', error);
     return null;
   }
 };
