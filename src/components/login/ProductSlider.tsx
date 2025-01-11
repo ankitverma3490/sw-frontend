@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useMemo, FC} from 'react';
 import {imageData} from '@utils/dummyData';
 import AutoScroll from '@homielab/react-native-auto-scroll';
-import {screenHeight, screenWidth} from '@utils/scaling';
+import {screenWidth} from '@utils/scaling';
 const ProductSlider = () => {
   const rows = useMemo(() => {
     const result = [];

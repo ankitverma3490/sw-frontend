@@ -6,14 +6,15 @@ import {RFValue} from 'react-native-responsive-fontsize';
  import CustomText from './CustomText';
 import { goBack } from '@utils/Navigation';
 
-const CustomHeader: FC<{title: string; search?: boolean}> = ({
+const CustomHeader: FC<{title: string; search?: boolean,onPress:()=>void}> = ({
   title,
   search,
+  onPress
 }) => {
   return (
     <SafeAreaView>
       <View style={styles.flexRow}>
-        <Pressable onPress={() =>goBack() }>
+        <Pressable onPress={onPress}>
           <Icon name="chevron-back" color={Colors.text} size={RFValue(16)} />
         </Pressable>
         <CustomText

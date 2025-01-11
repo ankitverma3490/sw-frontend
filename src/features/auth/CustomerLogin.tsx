@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   StyleSheet,
   Animated,
   Image,
@@ -25,6 +24,7 @@ import useKeyBoardOffsetHeight from '@utils/useKeyBoardOffsetHeight';
 import CustomButton from '@components/ui/CustomButton';
 import LinearGradient from 'react-native-linear-gradient'
 import { customerLogin } from '../../services/authService';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const bottomColors = [...lightColors].reverse()
 const CustomerLogin: FC = () => {
@@ -136,7 +136,7 @@ const CustomerLogin: FC = () => {
         </CustomSafeAreaView>
         <View style={styles.footer}>
           <SafeAreaView>
-            <CustomText>
+            <CustomText fontSize={RFValue(6)}>
               By continuing,you agree to our terms of service & Privacy policy
             </CustomText>
           </SafeAreaView>
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'white',
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingBottom: 20,
   },
   text: {
     marginTop: 2,

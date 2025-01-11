@@ -47,7 +47,7 @@ const ProductOrder: FC = () => {
   }
   return (
     <View style={styles.container}>
-      <CustomHeader title="Checkout" />
+      <CustomHeader title="Checkout" onPress={()=>navigate('ProductCategories')} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <OrderList />
         {/* coupon section */}

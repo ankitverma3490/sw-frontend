@@ -10,7 +10,7 @@ import WalletSection from './WalletSection';
 import ActionButton from './ActionButton';
 import OrderItem from './OrderItem';
 import { storage, tokenStorage } from '@state/Storage';
-import { resetAndNavigate } from '@utils/Navigation';
+import { navigate, resetAndNavigate } from '@utils/Navigation';
  
 const Profile: FC = () => {
   const [orders, setOrders] = useState([]);
@@ -54,7 +54,7 @@ const Profile: FC = () => {
   }
   return (
     <View style={styles.container}>
-      <CustomHeader title="Profile" />
+      <CustomHeader title="Profile" onPress={()=>navigate('ProductDashboard')}/>
       <FlatList
         data={orders}
         ListHeaderComponent={renderHeader}

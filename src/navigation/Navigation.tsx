@@ -1,8 +1,8 @@
-import React, {FC} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
+import React, { FC } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from '@features/auth/SplashScreen';
-import {navigationRef} from '@utils/Navigation';
+import { navigationRef } from '@utils/Navigation';
 import CustomerLogin from '@features/auth/CustomerLogin';
 import DeliveryLogin from '@features/auth/DeliveryLogin';
 import ProductDashboard from '@features/dashboard/ProductDashboard';
@@ -13,62 +13,27 @@ import OrderSuccess from '@features/order/OrderSuccess';
 import LiveTracking from '@features/map/LiveTracking';
 import Profile from '@features/profile/Profile';
 import DeliveryMap from '@features/delivery/DeliveryMap';
-const stack = createNativeStackNavigator();
+
+const Stack = createNativeStackNavigator();
+
 const Navigation: FC = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <stack.Navigator
+      <Stack.Navigator
         initialRouteName="SplashScreen"
-        screenOptions={{headerShown: false}}>
-        <stack.Screen name="SplashScreen" component={SplashScreen} />
-        <stack.Screen name="DeliveryMap" component={DeliveryMap} />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="Profile"
-          component={Profile}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="ProductDashboard"
-          component={ProductDashboard}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="LiveTracking"
-          component={LiveTracking}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="ProductCategories"
-          component={ProductCategories}
-        />
-        
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="DeliveryDashboard"
-          component={DeliveryDashboard}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="ProductOrder"
-          component={ProductOrder}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="OrderSuccess"
-          component={OrderSuccess}
-        /> 
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="DeliveryLogin"
-          component={DeliveryLogin}
-        />
-        <stack.Screen
-          options={{animation: 'fade'}}
-          name="CustomerLogin"
-          component={CustomerLogin}
-        />
-      </stack.Navigator>
+        screenOptions={{ headerShown: false, animation: 'fade' }}>
+        <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="DeliveryMap" component={DeliveryMap} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="ProductDashboard" component={ProductDashboard} />
+        <Stack.Screen name="LiveTracking" component={LiveTracking} />
+        <Stack.Screen name="ProductCategories" component={ProductCategories} />
+        <Stack.Screen name="DeliveryDashboard" component={DeliveryDashboard} />
+        <Stack.Screen name="ProductOrder" component={ProductOrder} />
+        <Stack.Screen name="OrderSuccess" component={OrderSuccess} />
+        <Stack.Screen name="DeliveryLogin" component={DeliveryLogin} />
+        <Stack.Screen name="CustomerLogin" component={CustomerLogin} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
