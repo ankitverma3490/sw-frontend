@@ -54,7 +54,8 @@ const CustomerLogin: FC = () => {
     setLoading(true);
     try {
       await customerLogin(phoneNumber)
-      resetAndNavigate("ProductDashboard")
+      resetAndNavigate('OtpScreen')
+      // resetAndNavigate("ProductDashboard")
     } catch (error) {
       Alert.alert("Login Failed")
     }finally{

@@ -13,6 +13,7 @@ import OrderSuccess from '@features/order/OrderSuccess';
 import LiveTracking from '@features/map/LiveTracking';
 import Profile from '@features/profile/Profile';
 import DeliveryMap from '@features/delivery/DeliveryMap';
+import OtpScreen from '@features/auth/OtpScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ const Navigation: FC = () => {
         <Stack.Screen name="OrderSuccess" component={OrderSuccess} />
         <Stack.Screen name="DeliveryLogin" component={DeliveryLogin} />
         <Stack.Screen name="CustomerLogin" component={CustomerLogin} />
+        <Stack.Screen name="OtpScreen" component={OtpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
