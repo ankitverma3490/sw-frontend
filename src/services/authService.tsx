@@ -20,7 +20,7 @@ export const deliveryLogin = async (email: string,password:string) => {
   };
 export const customerLogin = async (phone: string) => {
   try {
-    const response = await axios.post(`${BASE_URL}/customer/login`, {phone});
+     const response = await axios.post(`${BASE_URL}/customer/login`, {phone});
     const {accessToken, refreshToken, customer} = response.data;
     tokenStorage.set('accessToken', accessToken);
     tokenStorage.set('refreshToken', refreshToken);
@@ -30,7 +30,26 @@ export const customerLogin = async (phone: string) => {
     console.log('Login Error', error);
   }
 };
+ 
+export const updateAddress = async (address: string) => {
+  try {
+    const requestBody = {
+      address: address  
+    };
+    const accessToken = tokenStorage.getString('accessToken');
 
+    const response = await axios.patch(`${BASE_URL}/user`, requestBody,{
+      headers: {
+        Authorization: `Bearer ${accessToken}` 
+      }
+    });
+    const {setUser} = useAuthStore.getState();
+    setUser(response.data.user);
+  } catch (error) {
+    console.log("Error in updating address:", error);
+  }
+};
+ 
 export const refetchUser = async (setUser:any) => {
    try {
     const response = await appAxios.get('/user')

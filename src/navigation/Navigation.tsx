@@ -14,7 +14,7 @@ import LiveTracking from '@features/map/LiveTracking';
 import Profile from '@features/profile/Profile';
 import DeliveryMap from '@features/delivery/DeliveryMap';
 import OtpScreen from '@features/auth/OtpScreen';
-
+ import UpdateAddress from '@components/address/UpdateAddress';
 const Stack = createNativeStackNavigator();
 
 const Navigation: FC = () => {
@@ -26,6 +26,7 @@ const Navigation: FC = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="DeliveryMap" component={DeliveryMap} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="UpdateAddress" component={UpdateAddress} />
         <Stack.Screen name="ProductDashboard" component={ProductDashboard} />
         <Stack.Screen name="LiveTracking" component={LiveTracking} />
         <Stack.Screen name="ProductCategories" component={ProductCategories} />

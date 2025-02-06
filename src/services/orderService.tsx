@@ -42,7 +42,7 @@ export const fetchOrders = async (
    let uri =
     status === 'available'
       ? `order?status=${status}&branchId=${branchId}`
-      : `order?branchId=${userId}&deliveryPartnerId=${branchId}&status=delivered`;
+      : `order?branchId=${branchId}&deliveryPartnerId=${userId}&status=delivered`;
   try {
     const response = await appAxios.get(uri);
     return response.data;

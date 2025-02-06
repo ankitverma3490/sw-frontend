@@ -9,7 +9,7 @@ import CustomText from '@components/ui/CustomText'
 import OrderItem from './OrderItem'
 
 const DeliveryDashboard = () => {
-  const{user} = useAuthStore()
+  const user = useAuthStore(state => state.user)
   const [selectedTab , setSelectedTab] = useState <'available' | 'delivered'>('available')
   const [loading ,setLoading] = useState<boolean>(false)
   const [data ,setData] = useState<any[]>([])
@@ -18,14 +18,14 @@ const DeliveryDashboard = () => {
     setData([])
     setRefreshing(true)
     setLoading(true)
-    const data = await fetchOrders(selectedTab,user?._id,user?.branch)
+    const data = await fetchOrders(selectedTab,user?.branch,user?._id)
     setData(data)
     setRefreshing(false)
     setLoading(false)
    }
    useEffect(()=>{
     fetchData()
-  },[selectedTab])
+  },[selectedTab])   
 
   const renderOrderItem =({item,index}:any)=>{
    return(

@@ -5,15 +5,17 @@ import CustomInput from '@components/ui/CustomInput';
 import CustomButton from '@components/ui/CustomButton';
 import CustomText from '@components/ui/CustomText';
 import { resetAndNavigate } from '@utils/Navigation';
+import { useAuthStore } from '@state/authStore';
 
 const OtpScreen = () => {
   const [otp, setOtp] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const {user} = useAuthStore()
 
   const handleOtp = () => {
     setLoading(true);
     try {
-      resetAndNavigate('ProductDashboard');
+      {user?.address!=null?resetAndNavigate('ProductDashboard'):resetAndNavigate("UpdateAddress")}
     } catch (error) {
       Alert.alert('Invalid OTP', 'Please try again with a valid OTP.');
       console.log('Error in verifying OTP', error);
