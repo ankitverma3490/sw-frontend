@@ -29,7 +29,7 @@ export const customerLogin = async (phone: string) => {
   } catch (error) {
     console.log('Login Error', error);
   }
-};
+}; 
  
 export const updateAddress = async (address: string) => {
   try {

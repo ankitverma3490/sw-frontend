@@ -11,7 +11,7 @@ import BillDetails from './BillDetails';
 import { hocStyles } from '@styles/GlobalStyles';
 import { useAuthStore } from '@state/authStore';
 import ArrowButton from '@components/ui/ArrowButton';
-import { navigate } from '@utils/Navigation';
+import { navigate, resetAndNavigate } from '@utils/Navigation';
 import { createOrder } from '@services/orderService';
 
 const ProductOrder: FC = () => {
@@ -90,7 +90,7 @@ const ProductOrder: FC = () => {
                         <CustomText variant='h9' numberOfLines={2} style={{opacity:0.6}}>{user?.address}</CustomText>
                     </View>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{resetAndNavigate("UpdateAddress")}}>
                     <CustomText variant='h8' style={{color:Colors.secondary}} fontFamily={Fonts.Medium}>Change</CustomText>
                 </TouchableOpacity>
             </View>

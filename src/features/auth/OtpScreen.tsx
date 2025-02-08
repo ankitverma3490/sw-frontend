@@ -15,7 +15,7 @@ const OtpScreen = () => {
   const handleOtp = () => {
     setLoading(true);
     try {
-      {user?.address!=null?resetAndNavigate('ProductDashboard'):resetAndNavigate("UpdateAddress")}
+      {user?.address!=null?resetAndNavigate('ProductDashboard'):resetAndNavigate("AddAddress")}
     } catch (error) {
       Alert.alert('Invalid OTP', 'Please try again with a valid OTP.');
       console.log('Error in verifying OTP', error);
