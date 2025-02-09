@@ -1,5 +1,5 @@
 import {View, Text, Alert, StyleSheet} from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {deliveryLogin} from '@services/authService';
 import {resetAndNavigate} from '@utils/Navigation';
 import CustomSafeAreaView from '@components/global/CustomSafeAreaView';
@@ -12,17 +12,24 @@ import CustomInput from '@components/ui/CustomInput';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '@components/ui/CustomButton';
-
+import { useAuthStore } from '@state/authStore';
 const DeliveryLogin: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+   const {user} = useAuthStore()
 
+   useEffect(() => {
+    if(user?.role == "SuperAdmin"){resetAndNavigate('SuperAdminDashboard')}
+    if(user?.role == "Admin"){resetAndNavigate('AdminDashboard')}
+    if(user?.role == "delivery"){resetAndNavigate('ProductDashboard')}
+   },[user])
   const handleLogin = async () => {
     setLoading(true);
     try {
       await deliveryLogin(email, password);
-      resetAndNavigate('DeliveryDashboard');
+      // console.log(user);
+      // resetAndNavigate('DeliveryDashboard');
     } catch (error) {
       Alert.alert('Login Failed');
     } finally {

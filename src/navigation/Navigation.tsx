@@ -16,6 +16,8 @@ import DeliveryMap from '@features/delivery/DeliveryMap';
 import OtpScreen from '@features/auth/OtpScreen';
  import AddAddress from '@components/address/AddAddress';
 import UpdateAddress from '@components/address/UpdateAddress';
+import SuperAdminDashboard from '@features/superAdmin/SuperAdminDashboard';
+import AdminDashboard from '@features/Admin/AdminDashboard';
 const Stack = createNativeStackNavigator();
 
 const Navigation: FC = () => {
@@ -27,6 +29,8 @@ const Navigation: FC = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="DeliveryMap" component={DeliveryMap} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="SuperAdminDashboard" component={SuperAdminDashboard} />
+         <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
         <Stack.Screen name="AddAddress" component={AddAddress} />
         <Stack.Screen name="UpdateAddress" component={UpdateAddress} />
         <Stack.Screen name="ProductDashboard" component={ProductDashboard} />
